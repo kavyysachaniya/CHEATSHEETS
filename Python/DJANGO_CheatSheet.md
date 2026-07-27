@@ -58,13 +58,10 @@ TEMPLATES = [
 
 ```python
 from django.db import models
-
 class Student(models.Model):
-
     name = models.CharField(max_length=100)
     roll = models.IntegerField()
     city = models.CharField(max_length=100)
-
     def __str__(self):
         return self.name
 ```
@@ -75,7 +72,6 @@ class Student(models.Model):
 
 ```python
 from .models import Student
-
 admin.site.register(Student)
 ```
 
@@ -85,7 +81,6 @@ admin.site.register(Student)
 
 ```bash
 python manage.py makemigrations
-
 python manage.py migrate
 ```
 
@@ -98,16 +93,9 @@ from django import forms
 from .models import Student
 
 class StudentForm(forms.ModelForm):
-
     class Meta:
-
         model = Student
-
-        fields = [
-            'name',
-            'roll',
-            'city'
-        ]
+        fields = ['name','roll','city']
 ```
 
 ---
@@ -391,11 +379,8 @@ Welcome {{ user.username }}
 from rest_framework import serializers
 
 class StudentSerializer(serializers.ModelSerializer):
-
     class Meta:
-
         model = Student
-
         fields = "__all__"
 ```
 
@@ -407,11 +392,8 @@ class StudentSerializer(serializers.ModelSerializer):
 from rest_framework import viewsets
 
 class StudentViewSet(viewsets.ModelViewSet):
-
     queryset = Student.objects.all()
-
     serializer_class = StudentSerializer
-
     permission_classes = [
         IsAuthenticated,
         IsAdminOrReadOnly
@@ -426,12 +408,9 @@ class StudentViewSet(viewsets.ModelViewSet):
 from rest_framework.permissions import BasePermission
 
 class IsAdminOrReadOnly(BasePermission):
-
     def has_permission(self, request, view):
-
         if request.method in SAFE_METHODS:
             return True
-
         return request.user.is_staff
 ```
 
@@ -441,18 +420,10 @@ class IsAdminOrReadOnly(BasePermission):
 
 ```python
 from rest_framework.routers import DefaultRouter
-
 router = DefaultRouter()
+router.register('students', StudentViewSet, basename='students')
 
-router.register(
-    'students',
-    StudentViewSet,
-    basename='students'
-)
-
-urlpatterns = [
-    path('api/', include(router.urls))
-]
+urlpatterns = [path('api/', include(router.urls))]
 ```
 
 ---
