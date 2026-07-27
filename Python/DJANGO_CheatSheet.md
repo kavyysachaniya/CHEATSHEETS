@@ -111,56 +111,71 @@ class StudentForm(forms.ModelForm):
 ```
 
 ---
-
 # 7. CRUD (Function Based Views)
 
 ## Imports
 
 ```python
 from django.shortcuts import render, redirect, get_object_or_404
+from .models import Student
+from .forms import StudentForm
 ```
 
 ---
 
-## Read
+## Read (Display All Records)
 
 ```python
-objects = Student.objects.all()
+def student_list(request):
+    students = Student.objects.all()
+    return render(request,'students/student_list.html',{'students': students})
 ```
 
 ---
 
-## Create
+## Create (Insert Record)
 
 ```python
-form = StudentForm(request.POST)
-
-if form.is_valid():
-
-    form.save()
+def student_create(request):
+    if request.method == 'POST':
+        form = StudentForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('student_list')
+    else:
+        form = StudentForm()
+    return render(request,'students/student_form.html',{'form': form})
 ```
 
 ---
 
-## Update
+## Update (Modify Record)
 
 ```python
-form = StudentForm(
-    request.POST,
-    instance=student
-)
+def student_update(request, pk):
+    student = get_object_or_404(Student, pk=pk)
+    if request.method == 'POST':
+        form = StudentForm(request.POST, instance=student)
+        if form.is_valid():
+            form.save()
+            return redirect('student_list')
+    else:
+        form = StudentForm(instance=student)
+    return render(request,'students/student_form.html',{'form': form})
 ```
 
 ---
 
-## Delete
+## Delete (Remove Record)
 
 ```python
-student.delete()
+def student_delete(request, pk):
+    student = get_object_or_404(Student, pk=pk)
+    if request.method == 'POST':
+        student.delete()
+        return redirect('student_list')
+    return render(request,'students/student_confirm_delete.html',{'student': student})
 ```
-
----
-
 # 8. URL CONFIGURATION
 
 ## Project urls.py
@@ -181,31 +196,86 @@ path('delete/<int:pk>/', views.student_delete),
 ```
 
 ---
+# 9. HTML TEMPLATES
 
-# 9. TEMPLATES
-
-## student_list.html
+## List Template (list.html)
 
 ```html
-Display all students
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Title</title>
+</head>
+<body>
+    <h1>Heading</h1>
+    <a href="{% url 'create_name' %}">Add New</a>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Field 1</th>
+            <th>Field 2</th>
+            <th>Field 3</th>
+            <th>Actions</th>
+        </tr>
+        {% for object in objects %}
+        <tr>
+            <td>{{ object.id }}</td>
+            <td>{{ object.field1 }}</td>
+            <td>{{ object.field2 }}</td>
+            <td>{{ object.field3 }}</td>
+            <td>
+                <a href="{% url 'update_name' object.id %}">Edit</a> |
+                <a href="{% url 'delete_name' object.id %}">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
 ```
 
 ---
 
-## student_form.html
+## Form Template (form.html)
 
 ```html
-{{ form.as_p }}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Title</title>
+</head>
+<body>
+    <h1>Form</h1>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save</button>
+    </form>
+    <a href="{% url 'list_name' %}">Back to List</a>
+</body>
+</html>
 ```
 
 ---
 
-## student_confirm_delete.html
+## Delete Template (confirm_delete.html)
 
 ```html
-Delete Confirmation
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Delete</title>
+</head>
+<body>
+    <h1>Are you sure you want to delete "{{ object.field1 }}"?</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <button type="submit">Yes, Delete</button>
+    </form>
+    <a href="{% url 'list_name' %}">Cancel</a>
+</body>
+</html>
 ```
-
 ---
 
 # 10. LOGIN / SIGNUP / LOGOUT
@@ -213,9 +283,18 @@ Delete Confirmation
 ## Imports
 
 ```python
-from django.contrib.auth import authenticate, login, logout
+from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import authenticate, login, logout
+```
+
+---
+
+## Home
+
+```python
+def home(request):
+    return render(request,'home.html')
 ```
 
 ---
@@ -223,15 +302,18 @@ from django.contrib.auth.forms import UserCreationForm
 ## Signup
 
 ```python
-User.objects.create_user(...)
-```
-
-OR
-
-```python
-form = UserCreationForm(request.POST)
-
-form.save()
+def signup(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        email = request.POST['email']
+        password = request.POST['password']
+        User.objects.create_user(
+            username=username,
+            email=email,
+            password=password
+        )
+        return redirect('login')
+    return render(request,'signup.html')
 ```
 
 ---
@@ -239,9 +321,18 @@ form.save()
 ## Login
 
 ```python
-user = authenticate(...)
-
-login(request, user)
+def login_view(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(
+            username=username,
+            password=password
+        )
+        if user:
+            login(request,user)
+            return redirect('home')
+    return render(request,'login.html')
 ```
 
 ---
@@ -249,9 +340,49 @@ login(request, user)
 ## Logout
 
 ```python
-logout(request)
+def logout_view(request):
+    logout(request)
+    return redirect('login')
+```
+---
+
+## signup.html
+
+```html
+<form method="POST">
+    {% csrf_token %}
+    <input type="text" name="username">
+    <input type="email" name="email">
+    <input type="password" name="password">
+    <button>Signup</button>
+</form>
 ```
 
+---
+
+## login.html
+
+```html
+<form method="POST">
+    {% csrf_token %}
+    <input type="text" name="username">
+    <input type="password" name="password">
+    <button>Login</button>
+</form>
+```
+
+---
+
+## home.html
+
+```html
+{% if user.is_authenticated %}
+Welcome {{ user.username }}
+<a href="/logout/">Logout</a>
+{% else %}
+<a href="/login/">Login</a>
+{% endif %}
+```
 ---
 
 # 11. SERIALIZER
