@@ -58,10 +58,7 @@ column6 = []
 ## Multiple Elements
 
 ```python
-data = soup.find_all(
-    "tag_name",
-    class_="class_name"
-)
+data = soup.find_all("tag_name", class_="class_name")
 ```
 
 ---
@@ -69,10 +66,7 @@ data = soup.find_all(
 ## Single Element
 
 ```python
-data = soup.find(
-    "tag_name",
-    class_="class_name"
-)
+data = soup.find("tag_name",class_="class_name")
 ```
 
 ---
@@ -82,26 +76,11 @@ data = soup.find(
 ```python
 for i in data:
 
-    column1.append(
-        i.find(
-            "tag_name",
-            class_="class_name"
-        ).text.strip()
-    )
+    column1.append(i.find("tag_name",class_="class_name").text.strip())
 
-    column2.append(
-        i.find(
-            "tag_name",
-            class_="class_name"
-        ).text.strip()
-    )
+    column2.append(i.find("tag_name",class_="class_name").text.strip())
 
-    column3.append(
-        i.find(
-            "tag_name",
-            class_="class_name"
-        ).text.strip()
-    )
+    column3.append(i.find("tag_name",class_="class_name").text.strip())
 ```
 
 ---
@@ -109,12 +88,7 @@ for i in data:
 ## Extract Multiple Elements
 
 ```python
-column4.append(
-    i.find_all(
-        "tag_name",
-        class_="class_name"
-    )[0].text.strip()
-)
+column4.append(i.find_all("tag_name",class_="class_name")[0].text.strip())
 ```
 
 ---
@@ -122,11 +96,7 @@ column4.append(
 ## Extract Attribute
 
 ```python
-column5.append(
-    i.find(
-        "tag_name"
-    )["href"]
-)
+column5.append(i.find("tag_name")["href"])
 ```
 
 ---
@@ -134,11 +104,7 @@ column5.append(
 ## Split Text
 
 ```python
-column6.append(
-    i.find(
-        "tag_name"
-    ).text.strip().split()[0]
-)
+column6.append(i.find("tag_name").text.strip().split()[0])
 ```
 
 ---
@@ -147,13 +113,7 @@ column6.append(
 
 ```python
 try:
-    column.append(
-        i.find(
-            "tag_name",
-            class_="class_name"
-        ).text.strip()
-    )
-
+    column.append(i.find("tag_name",class_="class_name").text.strip())
 except:
     column.append(np.nan)
 ```
