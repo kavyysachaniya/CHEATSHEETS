@@ -75,11 +75,8 @@ data = soup.find("tag_name",class_="class_name")
 
 ```python
 for i in data:
-
     column1.append(i.find("tag_name",class_="class_name").text.strip())
-
     column2.append(i.find("tag_name",class_="class_name").text.strip())
-
     column3.append(i.find("tag_name",class_="class_name").text.strip())
 ```
 
