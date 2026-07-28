@@ -196,7 +196,7 @@ path('delete/<int:pk>/', views.student_delete),
 </head>
 <body>
     <h1>Heading</h1>
-    <a href="{% url 'create_name' %}">Add New</a>
+    <a href="{% url 'student_create' %}">Add New</a>
     <table border="1">
         <tr>
             <th>ID</th>
