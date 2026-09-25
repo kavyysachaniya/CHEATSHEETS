@@ -1,4 +1,3 @@
-````md
 # MOTADATA — TRAINEE PRODUCT ENGINEER
 ## 2–3 Hour Crash Revision
 ### Topics 1–3: JavaScript → React → REST APIs
