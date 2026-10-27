@@ -1,153 +1,201 @@
-Profit & Loss — Complete Formula Cheat Sheet
+# 📘 Profit & Loss — Complete Formula Cheat Sheet
 
-1. Basic Formulas
+## 1. Basic Formulas
 
-Quantity| Formula
-Profit| (SP-CP)
-Loss| (CP-SP)
-Profit Percentage| (\dfrac{\text{Profit}}{CP}\times100)
-Loss Percentage| (\dfrac{\text{Loss}}{CP}\times100)
+| Quantity | Formula |
+|---|---|
+| Profit | `SP - CP` |
+| Loss | `CP - SP` |
+| Profit Percentage | `(Profit / CP) × 100` |
+| Loss Percentage | `(Loss / CP) × 100` |
 
-Where:
+**Abbreviations:**
+- **CP** = Cost Price
+- **SP** = Selling Price
+- **MP** = Marked Price
 
-- CP = Cost Price
-- SP = Selling Price
-- MP = Marked Price
+---
 
-2. Selling Price (SP)
+## 2. Selling Price (SP)
 
-Situation| Formula
-At (x%) profit| (\displaystyle SP=CP\times\frac{100+x}{100})
-At (x%) loss| (\displaystyle SP=CP\times\frac{100-x}{100})
+### At `x%` Profit
 
-3. Cost Price (CP)
+$$
+SP = CP \times \frac{100+x}{100}
+$$
 
-Situation| Formula
-Sold at (x%) profit| (\displaystyle CP=SP\times\frac{100}{100+x})
-Sold at (x%) loss| (\displaystyle CP=SP\times\frac{100}{100-x})
+### At `x%` Loss
 
-4. Marked Price and Discount
+$$
+SP = CP \times \frac{100-x}{100}
+$$
 
-Quantity| Formula
-Discount| (MP-SP)
-Discount Percentage| (\displaystyle\frac{\text{Discount}}{MP}\times100)
-SP after (x%) discount| (\displaystyle MP\times\frac{100-x}{100})
-MP from SP and discount| (\displaystyle SP\times\frac{100}{100-\text{Discount %}})
-MP at (x%) above CP| (\displaystyle CP\times\frac{100+x}{100})
+---
 
-Successive Discounts
+## 3. Cost Price (CP)
 
-For two successive discounts of (a%) and (b%):
+### Sold at `x%` Profit
 
-[
-\boxed{\text{Net Discount}=a+b-\frac{ab}{100}%}
-]
+$$
+CP = SP \times \frac{100}{100+x}
+$$
 
-For three successive discounts of (a%), (b%), and (c%):
+### Sold at `x%` Loss
 
-[
-\boxed{100\left[1-\left(1-\frac a{100}\right)\left(1-\frac b{100}\right)\left(1-\frac c{100}\right)\right]%}
-]
+$$
+CP = SP \times \frac{100}{100-x}
+$$
 
-5. Successive Profit and Loss
+---
 
-Two successive profits
+## 4. Marked Price and Discount
 
-[
-\boxed{\text{Net Profit}=a+b+\frac{ab}{100}%}
-]
+| Quantity | Formula |
+|---|---|
+| Discount | `MP - SP` |
+| Discount Percentage | `(Discount / MP) × 100` |
+| SP after `x%` discount | `MP × (100 - x) / 100` |
+| MP from SP and discount | `SP × 100 / (100 - Discount%)` |
+| MP at `x%` above CP | `CP × (100 + x) / 100` |
 
-Two successive losses
+### Successive Discounts
 
-[
-\boxed{\text{Net Loss}=a+b-\frac{ab}{100}%}
-]
+For two successive discounts of `a%` and `b%`:
 
-Profit of (a%), followed by loss of (b%)
+$$
+\boxed{D = a+b-\frac{ab}{100}\%}
+$$
 
-[
-\boxed{\text{Net Change}=a-b-\frac{ab}{100}%}
-]
+For three successive discounts of `a%`, `b%`, and `c%`:
 
-- Positive result = Net profit
-- Negative result = Net loss
-- Zero = No profit, no loss
+$$
+\boxed{D=100\left[1-
+\left(1-\frac{a}{100}\right)
+\left(1-\frac{b}{100}\right)
+\left(1-\frac{c}{100}\right)\right]\%}
+$$
 
-6. Equal Selling Price
+---
 
-When two articles are sold at the same selling price, with (x%) profit on one and (x%) loss on the other:
+## 5. Successive Profit and Loss
 
-[
-\boxed{\text{Overall Loss}=\frac{x^2}{100}%}
-]
+### Two Successive Profits
 
-For different profit/loss percentages, calculate each cost price separately:
+$$
+\boxed{P=a+b+\frac{ab}{100}\%}
+$$
 
-[
-CP_1=\frac{SP}{1+\frac{\text{Profit %}}{100}}
-]
+### Two Successive Losses
 
-[
-CP_2=\frac{SP}{1-\frac{\text{Loss %}}{100}}
-]
+$$
+\boxed{L=a+b-\frac{ab}{100}\%}
+$$
 
-Then calculate the overall result using total CP and total SP.
+### Profit of `a%` Followed by Loss of `b%`
 
-7. False Weight / Dishonest Shopkeeper
+$$
+\boxed{N=a-b-\frac{ab}{100}\%}
+$$
 
-If a shopkeeper charges for (1\text{ kg}) but gives only (w) grams at the cost-price rate:
+- `N > 0` → Net profit
+- `N < 0` → Net loss
+- `N = 0` → No profit, no loss
 
-[
-\boxed{\text{Profit %}=\frac{1000-w}{w}\times100}
-]
+---
 
-More generally, when the price charged equals the cost of the stated weight:
+## 6. Equal Selling Price
 
-[
-\boxed{\text{Profit %}=\frac{\text{Stated Weight}-\text{Actual Weight}}{\text{Actual Weight}}\times100}
-]
+When two articles are sold at the **same selling price**, with `x%` profit on one and `x%` loss on the other:
 
-8. Change in Selling Price
+$$
+\boxed{\text{Overall Loss \%}=\frac{x^2}{100}}
+$$
 
-If the profit percentage changes from (a%) to (b%) due to a change in selling price:
+### Different Profit/Loss Percentages
 
-[
+For an article sold at a profit of `p%`:
+
+$$
+CP_1 = SP \times \frac{100}{100+p}
+$$
+
+For an article sold at a loss of `l%`:
+
+$$
+CP_2 = SP \times \frac{100}{100-l}
+$$
+
+Calculate total CP and total SP to find the overall result.
+
+---
+
+## 7. False Weight / Dishonest Shopkeeper
+
+If a shopkeeper charges for `1 kg` but gives only `w` grams at the cost-price rate:
+
+$$
+\boxed{\text{Profit \%}=\frac{1000-w}{w}\times100}
+$$
+
+### General Formula
+
+$$
+\boxed{\text{Profit \%}=
+\frac{\text{Stated Weight}-\text{Actual Weight}}
+{\text{Actual Weight}}\times100}
+$$
+
+---
+
+## 8. Change in Selling Price
+
+If the profit percentage changes from `a%` to `b%` because the selling price changes:
+
+$$
 \boxed{|\Delta SP|=CP\times\frac{|a-b|}{100}}
-]
+$$
 
 Therefore:
 
-[
+$$
 \boxed{CP=\frac{|\Delta SP|\times100}{|a-b|}}
-]
+$$
 
-Here, (|\Delta SP|) is the absolute difference between the two selling prices.
+Here, `|ΔSP|` is the absolute difference between the two selling prices.
 
-9. Overall Profit and Loss
+---
 
-Quantity| Formula
-Total Profit| Total SP − Total CP
-Total Loss| Total CP − Total SP
-Overall Profit %| (\displaystyle\frac{\text{Total Profit}}{\text{Total CP}}\times100)
-Overall Loss %| (\displaystyle\frac{\text{Total Loss}}{\text{Total CP}}\times100)
+## 9. Overall Profit and Loss
 
-Important: Always use total CP as the base for overall profit/loss calculations.
+| Quantity | Formula |
+|---|---|
+| Total Profit | `Total SP - Total CP` |
+| Total Loss | `Total CP - Total SP` |
+| Overall Profit % | `(Total Profit / Total CP) × 100` |
+| Overall Loss % | `(Total Loss / Total CP) × 100` |
 
-10. Quick Multipliers for Mental Calculation
+**Important:** Always use **total CP** as the base for overall profit/loss calculations.
 
-Percentage| Quick formula
-10% profit| (SP=CP\times\frac{11}{10})
-20% profit| (SP=CP\times\frac65)
-25% profit| (SP=CP\times\frac54)
-10% loss| (SP=CP\times\frac9{10})
-20% loss| (SP=CP\times\frac45)
-25% loss| (SP=CP\times\frac34)
+---
 
-11. Golden Rules for Exams
+## 10. Quick Multipliers for Mental Calculation
 
-1. Profit/loss percentage is normally calculated on CP.
-2. Discount percentage is calculated on MP.
-3. Overall profit/loss percentage uses total CP as the base.
+| Percentage | Quick Formula |
+|---|---|
+| 10% profit | `SP = CP × 11/10` |
+| 20% profit | `SP = CP × 6/5` |
+| 25% profit | `SP = CP × 5/4` |
+| 10% loss | `SP = CP × 9/10` |
+| 20% loss | `SP = CP × 4/5` |
+| 25% loss | `SP = CP × 3/4` |
+
+---
+
+## 11. Golden Rules for Exams
+
+1. **Profit/loss percentage** is normally calculated on CP.
+2. **Discount percentage** is calculated on MP.
+3. **Overall profit/loss percentage** uses total CP as the base.
 4. Successive discounts must not simply be added.
 5. Equal percentage gain and loss on two articles sold at the same SP result in an overall loss.
-6. Convert percentages into fractions whenever possible to calculate faster without a calculator.
+6. Convert percentages into fractions whenever possible for faster, calculator-free calculations.
